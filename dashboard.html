@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Dummy Dashboard</title>
+    <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f4f4f4;
+            }
+
+            .container {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                margin-top: 20px;
+            }
+
+            .metric {
+                background-color: #3498db;
+                color: #fff;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .metric p {
+                margin: 0;
+            }
+
+            .category {
+                background-color: #ecf0f1;
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            }
+
+            .category h2 {
+                color: #2c3e50;
+            }
+
+            .category p {
+                margin: 8px 0;
+            }
+
+            .row {
+                margin-bottom: 20px;
+            }
+
+    </style>
+
+</head>
+<body>
+     <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="metric">
+                    <p>Total Revenue: $<span id="totalRevenue"></span></p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <div class="category">
+                    <h2>Fiber Network Payments</h2>
+                    <p>Monthly: $<span id="monthlyPayment"></span></p>
+                    <p>Quarterly: $<span id="quarterlyPayment"></span></p>
+                    <p>Annual: $<span id="annualPayment"></span></p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="category">
+                    <h2>Maintenance Costs</h2>
+                    <p>Monthly: $<span id="monthlyMaintenance"></span></p>
+                    <p>Quarterly: $<span id="quarterlyMaintenance"></span></p>
+                    <p>Annual: $<span id="annualMaintenance"></span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <canvas id="fiberPaymentsChart" width="400" height="300"></canvas>
+            </div>
+            <div class="col-md-6">
+                <canvas id="maintenanceCostsChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+            // Dummy data
+            const data = {
+                totalRevenue: 50000,
+                fiberNetworkPayments: {
+                    monthly: 25000,
+                    quarterly: 15000,
+                    annual: 10000
+                },
+                maintenanceCosts: {
+                    monthly: 5000,
+                    quarterly: 8000,
+                    annual: 20000
+                }
+            };
+
+            // Update HTML with dummy data
+            document.getElementById('totalRevenue').innerText = data.totalRevenue;
+            document.getElementById('monthlyPayment').innerText = data.fiberNetworkPayments.monthly;
+            document.getElementById('quarterlyPayment').innerText = data.fiberNetworkPayments.quarterly;
+            document.getElementById('annualPayment').innerText = data.fiberNetworkPayments.annual;
+            document.getElementById('monthlyMaintenance').innerText = data.maintenanceCosts.monthly;
+            document.getElementById('quarterlyMaintenance').innerText = data.maintenanceCosts.quarterly;
+            document.getElementById('annualMaintenance').innerText = data.maintenanceCosts.annual;
+
+            // Chart for Fiber Network Payments
+            const fiberPaymentsChart = new Chart(document.getElementById('fiberPaymentsChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Monthly', 'Quarterly', 'Annual'],
+                    datasets: [{
+                        label: 'Fiber Network Payments',
+                        backgroundColor: '#3498db',
+                        data: [
+                            data.fiberNetworkPayments.monthly,
+                            data.fiberNetworkPayments.quarterly,
+                            data.fiberNetworkPayments.annual
+                        ]
+                    }]
+                }
+            });
+
+            // Chart for Maintenance Costs
+            const maintenanceCostsChart = new Chart(document.getElementById('maintenanceCostsChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Monthly', 'Quarterly', 'Annual'],
+                    datasets: [{
+                        label: 'Maintenance Costs',
+                        backgroundColor: '#e74c3c',
+                        data: [
+                            data.maintenanceCosts.monthly,
+                            data.maintenanceCosts.quarterly,
+                            data.maintenanceCosts.annual
+                        ]
+                    }]
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
